@@ -49,12 +49,8 @@ class EquipmentRepository(BaseRepository[Equipment]):
                 query = query.join(EquipmentTemplate).where(
                     EquipmentTemplate.equipment_type == filters["equipment_type"]
                 )
-            if filters.get("is_equipped") is not None:
-                if filters["is_equipped"]:
-                    query = query.where(Equipment.id.in_(
-                        # Subquery to get equipped equipment IDs
-                        select(Equipment.id).where(Equipment.is_locked == True)
-                    ))
+            # Note: is_equipped filter requires checking Hero equipment slots
+            # For now, we skip this filter as it requires a separate query approach
         
         query = query.offset(skip).limit(limit)
         result = await self.db.execute(query)

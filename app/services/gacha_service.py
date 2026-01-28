@@ -53,10 +53,6 @@ class GachaService:
     - History tracking
     """
     
-    # In-memory pity counter (would be stored in database)
-    _pity_counters: Dict[str, Dict[str, int]] = {}
-    _pull_history: Dict[str, List[Dict]] = {}
-    
     def __init__(
         self,
         player_service=None,
@@ -71,6 +67,9 @@ class GachaService:
         """
         self.player_service = player_service
         self.hero_repository = hero_repository
+        # In-memory pity counter (would be stored in database in production)
+        self._pity_counters: Dict[str, Dict[str, int]] = {}
+        self._pull_history: Dict[str, List[Dict]] = {}
     
     async def get_banners(self) -> List[dict]:
         """

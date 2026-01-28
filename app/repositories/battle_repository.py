@@ -21,13 +21,11 @@ class BattleRepository:
     - Leaderboards
     """
     
-    # In-memory storage (would be Redis in production)
-    _active_battles: Dict[str, Dict[str, Any]] = {}
-    _battle_history: Dict[str, List[Dict[str, Any]]] = {}  # player_id -> battles
-    
     def __init__(self):
         """Initialize the battle repository."""
-        pass
+        # In-memory storage (would be Redis in production)
+        self._active_battles: Dict[str, Dict[str, Any]] = {}
+        self._battle_history: Dict[str, List[Dict[str, Any]]] = {}  # player_id -> battles
     
     async def save_active_battle(
         self,

@@ -152,7 +152,9 @@ class AuthService:
             
             player_id = str(player.id)
         else:
-            # Mock authentication for development
+            # DEV ONLY: Mock authentication when repository is not available.
+            # This is for development/testing purposes when no database is connected.
+            # In production, player_repository should always be provided.
             if username != "test_user" or password != "password":
                 raise InvalidCredentialsException()
             player_id = "mock-player-uuid"

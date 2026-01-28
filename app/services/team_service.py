@@ -22,8 +22,6 @@ class TeamService:
     - Team composition
     """
     
-    # In-memory storage (would be in database)
-    _teams: Dict[str, Dict[str, Any]] = {}
     MAX_TEAMS_PER_PLAYER = 10
     MAX_MEMBERS_PER_TEAM = 5
     
@@ -35,6 +33,8 @@ class TeamService:
             hero_service: Optional HeroService for hero validation
         """
         self.hero_service = hero_service
+        # In-memory storage (would be in database in production)
+        self._teams: Dict[str, Dict[str, Any]] = {}
     
     async def get_teams(self, player_id: str) -> List[dict]:
         """

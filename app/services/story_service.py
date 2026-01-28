@@ -83,9 +83,6 @@ class StoryService:
     - Rewards
     """
     
-    # In-memory progress tracking (would be in database)
-    _player_progress: Dict[str, Dict[str, Any]] = {}
-    
     def __init__(self, player_service=None, battle_service=None):
         """
         Initialize the story service.
@@ -96,6 +93,8 @@ class StoryService:
         """
         self.player_service = player_service
         self.battle_service = battle_service
+        # In-memory progress tracking (would be in database in production)
+        self._player_progress: Dict[str, Dict[str, Any]] = {}
     
     async def get_chapters(self, player_id: str) -> List[dict]:
         """
