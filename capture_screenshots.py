@@ -37,6 +37,15 @@ def capture_screenshots():
     pygame.image.save(engine.screen, 'screenshots/demo_ui_components.png')
     print("Saved screenshots/demo_ui_components.png")
     
+    # Capture battle scene
+    print("Capturing battle scene...")
+    engine.scene_manager.change_scene("battle")
+    engine.scene_manager.update(0.016)
+    engine.screen.fill((0, 0, 0))
+    engine.scene_manager.render(engine.screen)
+    pygame.image.save(engine.screen, 'screenshots/battle_scene.png')
+    print("Saved screenshots/battle_scene.png")
+    
     pygame.quit()
     print("Screenshots captured successfully!")
 

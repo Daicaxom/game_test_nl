@@ -6,6 +6,7 @@ import pygame
 from game.core.scene_manager import SceneManager
 from game.scenes.main_menu import MainMenuScene
 from game.scenes.demo_scene import DemoScene
+from game.scenes.battle_scene import BattleScene
 from game.utils.settings import Settings
 
 
@@ -37,6 +38,7 @@ class GameEngine:
         # Register scenes
         self.scene_manager.register_scene("main_menu", MainMenuScene)
         self.scene_manager.register_scene("demo", DemoScene)
+        self.scene_manager.register_scene("battle", BattleScene)
         
     def run(self):
         """Main game loop"""
