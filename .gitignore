@@ -129,3 +129,6 @@ dmypy.json
 # Local configuration
 .env.local
 .env.*.local
+
+# Screenshots (generated, not source)
+screenshots/
