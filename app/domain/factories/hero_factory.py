@@ -54,10 +54,19 @@ class HeroFactory:
     - Thổ (Earth): High DEF, low SPD
     """
     
-    def __init__(self):
-        """Initialize factory with predefined templates"""
+    def __init__(self, load_all: bool = False):
+        """
+        Initialize factory with predefined templates.
+        
+        Args:
+            load_all: If True, loads all 200 heroes from hero_data module.
+                     If False (default), only loads the original 14 heroes.
+        """
         self._templates: Dict[str, HeroTemplate] = {}
         self._initialize_templates()
+        
+        if load_all:
+            self._load_all_heroes_from_data()
     
     def _initialize_templates(self) -> None:
         """Initialize all predefined hero templates"""
@@ -376,3 +385,54 @@ class HeroFactory:
         )
         
         return hero
+    
+    def _load_all_heroes_from_data(self) -> None:
+        """
+        Load all 200 heroes from the hero_data module.
+        This adds heroes that are not in the original hardcoded templates.
+        """
+        from app.data.hero_data import get_all_heroes
+        
+        element_map = {
+            "KIM": Element.KIM,
+            "MOC": Element.MOC,
+            "THUY": Element.THUY,
+            "HOA": Element.HOA,
+            "THO": Element.THO,
+        }
+        
+        for hero_data in get_all_heroes():
+            hero_id = hero_data["id"]
+            
+            # Skip if already exists (prefer original templates)
+            if hero_id in self._templates:
+                continue
+            
+            element = element_map.get(hero_data["element"], Element.THO)
+            
+            self._templates[hero_id] = HeroTemplate(
+                template_id=hero_id,
+                name=hero_data["name"],
+                element=element,
+                base_hp=hero_data["base_hp"],
+                base_atk=hero_data["base_atk"],
+                base_def=hero_data["base_def"],
+                base_spd=hero_data["base_spd"],
+                base_crit=hero_data["base_crit"],
+                base_dex=hero_data["base_dex"],
+                rarity=hero_data["base_rarity"],
+                description=hero_data.get("description", ""),
+                default_skills=["basic_attack"],
+                growth_rates={
+                    "HP": hero_data["growth_hp"],
+                    "ATK": hero_data["growth_atk"],
+                    "DEF": hero_data["growth_def"],
+                    "SPD": hero_data["growth_spd"],
+                    "CRIT": hero_data["growth_crit"],
+                    "DEX": hero_data["growth_dex"],
+                }
+            )
+    
+    def get_hero_count(self) -> int:
+        """Get the total number of available hero templates."""
+        return len(self._templates)
