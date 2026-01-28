@@ -218,9 +218,29 @@ class DragonCompanion(Mount):
     awakening_level: int = 0
     evolution_stages: List[EvolutionStage] = field(default_factory=list)
     
-    def __post_init__(self) -> None:
-        """Set mount type to dragon"""
-        object.__setattr__(self, 'mount_type', MountType.DRAGON)
+    def __init__(
+        self,
+        id: str,
+        name: str,
+        rarity: int = 3,
+        element: Element = Element.HOA,
+        evolution_stage: int = 0,
+        awakening_level: int = 0,
+        evolution_stages: List[EvolutionStage] = None,
+        **kwargs
+    ):
+        """Initialize DragonCompanion with mount_type always set to DRAGON"""
+        super().__init__(
+            id=id,
+            name=name,
+            mount_type=MountType.DRAGON,
+            rarity=rarity,
+            **kwargs
+        )
+        self.element = element
+        self.evolution_stage = evolution_stage
+        self.awakening_level = awakening_level
+        self.evolution_stages = evolution_stages or []
     
     def get_element_buff(self) -> Dict[str, float]:
         """

@@ -1,6 +1,7 @@
 """
 Enemy Entity - Non-player controlled combat units
 """
+import random
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import List, Optional, Dict, Any
@@ -89,7 +90,6 @@ class Enemy(Character):
             EnemyBehavior.BERSERKER: 0.3
         }
         
-        import random
         return random.random() < skill_chance.get(self.behavior, 0.5)
 
 
