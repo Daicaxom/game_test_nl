@@ -1,5 +1,5 @@
 """
-Tests for SkillDatabase - Predefined skills and skill factory
+Tests for SkillFactory - Predefined skills and skill factory
 Following TDD approach - tests written first
 """
 import pytest
