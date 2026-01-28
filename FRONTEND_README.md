@@ -24,20 +24,27 @@ All components follow TDD approach with comprehensive test coverage:
 - **HealthBar** (`game/ui/components/health_bar.py`): Animated health bar with color-coded states (high/medium/low)
 - **ManaBar** (`game/ui/components/mana_bar.py`): Animated mana bar for skill resources
 - **HexagonChart** (`game/ui/components/hexagon_chart.py`): Radar chart for character stats visualization (HP, ATK, DEF, SPD, CRIT, DEX)
+- **Card** (`game/ui/components/card.py`): Character/item card display with rarity colors, element indicators, and stats
+- **Modal** (`game/ui/components/modal.py`): Dialog component for information display and confirmations
+- **Grid** (`game/ui/components/grid.py`): 3x3 battle grid for turn-based combat positioning
 
 ### 4. Game Scenes ✅
 - **MainMenuScene** (`game/scenes/main_menu.py`): Main menu with Start Game, Settings, UI Demo, and Quit options
 - **DemoScene** (`game/scenes/demo_scene.py`): Showcase scene demonstrating all implemented UI components
+- **BattleScene** (`game/scenes/battle_scene.py`): Turn-based combat scene with dual grids, character cards, and action system
 
 ## Test Coverage
 
-**50 tests passing** across all modules:
+**96 tests passing** across all modules:
 - Settings & Colors: 9 tests
 - BaseScene: 9 tests  
 - SceneManager: 10 tests
 - Button Component: 9 tests
 - HealthBar Component: 8 tests
 - HexagonChart Component: 5 tests
+- Card Component: 12 tests
+- Modal Component: 13 tests
+- Grid Component: 21 tests
 
 All tests written following TDD methodology (tests written before implementation).
 
@@ -74,18 +81,31 @@ The main menu features:
 - Clean, centered layout
 
 ### UI Components Demo
-![UI Components Demo](https://github.com/user-attachments/assets/599944ad-2765-44b1-a674-104a8636b701)
+![UI Components Demo](https://github.com/user-attachments/assets/d7084de8-cf76-4f03-90d1-b5201b7806e5)
 
 The demo scene showcases:
 - **Buttons**: Normal and disabled states with hover effects
 - **Health & Mana Bars**: Animated bars with smooth transitions
 - **Hexagon Chart**: Character stats visualization in radar chart format
+- **Character Cards**: Card components with element colors and rarity indicators
+- **Battle Grid**: 3x3 grid for positioning characters
 - **Element Colors**: Five Elements (Wu Xing) color palette display
   - Kim (Metal) - Gold
   - Mộc (Wood) - Forest Green
   - Thủy (Water) - Dodger Blue
   - Hỏa (Fire) - Red Orange
   - Thổ (Earth) - Saddle Brown
+
+### Battle Scene
+![Battle Scene](https://github.com/user-attachments/assets/f7c4c640-a588-4e4a-93d7-46211f100f5a)
+
+The battle scene features:
+- **Dual Battle Grids**: Player and enemy 3x3 positioning grids
+- **Character Placement**: Characters displayed with element-colored indicators
+- **Status Bars**: Health and mana bars for both teams
+- **Action System**: Attack, Skill, Defend, and End Turn buttons
+- **Team Cards**: Character cards showing team composition
+- **Turn System**: Turn counter and phase indicator
 
 ## Architecture
 
@@ -99,13 +119,17 @@ game/
 ├── scenes/            # Game scenes
 │   ├── base_scene.py
 │   ├── main_menu.py
-│   └── demo_scene.py
+│   ├── demo_scene.py
+│   └── battle_scene.py
 ├── ui/                # UI components
 │   └── components/
 │       ├── button.py
 │       ├── health_bar.py
 │       ├── mana_bar.py
-│       └── hexagon_chart.py
+│       ├── hexagon_chart.py
+│       ├── card.py
+│       ├── modal.py
+│       └── grid.py
 └── utils/             # Utilities
     ├── settings.py
     └── colors.py
@@ -119,13 +143,7 @@ The following components from the design document are ready for future implement
 - EventHandler for advanced input handling
 - AudioManager for background music and sound effects
 
-### UI Components
-- Card component for character/item cards
-- Modal component for dialogs
-- Grid component for battle grid (3x3)
-
 ### Game Scenes
-- BattleScene for turn-based combat
 - CharacterScene for hero management
 - TeamScene for team building
 - GachaScene for character summoning

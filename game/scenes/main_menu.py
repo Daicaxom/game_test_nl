@@ -130,8 +130,7 @@ class MainMenuScene(BaseScene):
     
     def _on_start_game(self):
         """Handle start game button click"""
-        # TODO: Change to battle or story scene
-        pass
+        self.engine.change_scene("battle")
     
     def _on_settings(self):
         """Handle settings button click"""
