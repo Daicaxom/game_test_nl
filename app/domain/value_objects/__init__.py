@@ -2,5 +2,6 @@
 from app.domain.value_objects.element import Element
 from app.domain.value_objects.hexagon_stats import HexagonStats
 from app.domain.value_objects.grid_position import GridPosition
+from app.domain.value_objects.status_effect import StatusEffect, StatusEffectType
 
-__all__ = ["Element", "HexagonStats", "GridPosition"]
+__all__ = ["Element", "HexagonStats", "GridPosition", "StatusEffect", "StatusEffectType"]
