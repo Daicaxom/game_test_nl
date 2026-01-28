@@ -31,8 +31,9 @@ class DemoScene(BaseScene):
         
     def on_enter(self):
         """Called when scene becomes active"""
-        # Title
+        # Initialize fonts
         self.title_font = pygame.font.Font(None, 48)
+        self.label_font = pygame.font.Font(None, 24)
         
         # Create demo buttons
         self.components.append(
@@ -97,6 +98,9 @@ class DemoScene(BaseScene):
     def on_exit(self):
         """Called when scene is deactivated"""
         self.components.clear()
+        self.health_bar = None
+        self.mana_bar = None
+        self.hexagon_chart = None
     
     def on_pause(self):
         """Called when scene is paused"""
@@ -144,18 +148,16 @@ class DemoScene(BaseScene):
         screen.blit(title_surface, (50, 30))
         
         # Section labels
-        font = pygame.font.Font(None, 24)
-        
         # Buttons section
-        label = font.render("Buttons:", True, Colors.TEXT_SECONDARY)
+        label = self.label_font.render("Buttons:", True, Colors.TEXT_SECONDARY)
         screen.blit(label, (50, 70))
         
         # Bars section
-        label = font.render("Health & Mana Bars:", True, Colors.TEXT_SECONDARY)
+        label = self.label_font.render("Health & Mana Bars:", True, Colors.TEXT_SECONDARY)
         screen.blit(label, (50, 150))
         
         # Hexagon section
-        label = font.render("Character Stats (Hexagon Chart):", True, Colors.TEXT_SECONDARY)
+        label = self.label_font.render("Character Stats (Hexagon Chart):", True, Colors.TEXT_SECONDARY)
         screen.blit(label, (400, 70))
         
         # Render all components
@@ -172,7 +174,7 @@ class DemoScene(BaseScene):
             self.hexagon_chart.render(screen)
         
         # Display element colors
-        label = font.render("Element Colors:", True, Colors.TEXT_SECONDARY)
+        label = self.label_font.render("Element Colors:", True, Colors.TEXT_SECONDARY)
         screen.blit(label, (50, 300))
         
         elements = [
@@ -189,7 +191,7 @@ class DemoScene(BaseScene):
             pygame.draw.rect(screen, color, (50, y_offset, 30, 30))
             pygame.draw.rect(screen, Colors.TEXT, (50, y_offset, 30, 30), 1)
             # Label
-            text = font.render(name, True, Colors.TEXT)
+            text = self.label_font.render(name, True, Colors.TEXT)
             screen.blit(text, (90, y_offset + 5))
             y_offset += 40
     

@@ -42,6 +42,9 @@ class HexagonChart:
         
         # Stat order for consistent hexagon layout
         self.stat_order = ['HP', 'ATK', 'DEF', 'SPD', 'CRIT', 'DEX']
+        
+        # Pre-create font to avoid creating on every render
+        self.font = pygame.font.Font(None, 16)
     
     def get_normalized_stats(self) -> Dict[str, float]:
         """
@@ -119,13 +122,12 @@ class HexagonChart:
             pygame.draw.polygon(screen, self.fill_color, stat_vertices, 2)
         
         # Draw stat labels
-        font = pygame.font.Font(None, 16)
         for i, stat_name in enumerate(self.stat_order):
             angle = math.radians(90 - i * 60)
             label_distance = self.radius + 20
             x = self.center_x + label_distance * math.cos(angle)
             y = self.center_y - label_distance * math.sin(angle)
             
-            text_surface = font.render(stat_name, True, (255, 255, 255))
+            text_surface = self.font.render(stat_name, True, (255, 255, 255))
             text_rect = text_surface.get_rect(center=(x, y))
             screen.blit(text_surface, text_rect)

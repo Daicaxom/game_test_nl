@@ -42,6 +42,9 @@ class ManaBar:
         # Animation
         self.displayed_value = current
         self.animation_speed = 50  # Mana per second
+        
+        # Pre-create font to avoid creating on every render
+        self.font = pygame.font.Font(None, 12)
     
     @property
     def percentage(self) -> float:
@@ -76,8 +79,8 @@ class ManaBar:
         # Background
         pygame.draw.rect(screen, self.bg_color, self.rect)
         
-        # Fill
-        fill_width = int(self.rect.width * (self.displayed_value / self.maximum))
+        # Fill - use percentage property to avoid division by zero
+        fill_width = int(self.rect.width * self.percentage)
         fill_rect = pygame.Rect(
             self.rect.x, self.rect.y,
             fill_width, self.rect.height
@@ -89,8 +92,7 @@ class ManaBar:
         pygame.draw.rect(screen, self.border_color, self.rect, 1)
         
         # Text (optional)
-        font = pygame.font.Font(None, 12)
         text = f"{int(self.displayed_value)}/{self.maximum}"
-        text_surface = font.render(text, True, (255, 255, 255))
+        text_surface = self.font.render(text, True, (255, 255, 255))
         text_rect = text_surface.get_rect(center=self.rect.center)
         screen.blit(text_surface, text_rect)
