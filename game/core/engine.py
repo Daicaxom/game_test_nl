@@ -5,6 +5,7 @@ Main game loop and initialization
 import pygame
 from game.core.scene_manager import SceneManager
 from game.scenes.main_menu import MainMenuScene
+from game.scenes.demo_scene import DemoScene
 from game.utils.settings import Settings
 
 
@@ -14,7 +15,12 @@ class GameEngine:
     def __init__(self):
         """Initialize game engine"""
         pygame.init()
-        pygame.mixer.init()
+        
+        # Try to initialize audio, but continue if it fails (e.g., in headless environments)
+        try:
+            pygame.mixer.init()
+        except pygame.error:
+            print("Warning: Could not initialize audio device. Continuing without audio.")
         
         self.settings = Settings()
         self.screen = pygame.display.set_mode(
@@ -30,6 +36,7 @@ class GameEngine:
         
         # Register scenes
         self.scene_manager.register_scene("main_menu", MainMenuScene)
+        self.scene_manager.register_scene("demo", DemoScene)
         
     def run(self):
         """Main game loop"""

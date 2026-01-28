@@ -54,10 +54,20 @@ class MainMenuScene(BaseScene):
             )
         )
         
-        # Quit button
+        # Demo button
         self.buttons.append(
             Button(
                 position=(screen_center_x - 100, start_y + button_spacing * 2),
+                size=(200, 50),
+                text="UI Demo",
+                on_click=self._on_demo
+            )
+        )
+        
+        # Quit button
+        self.buttons.append(
+            Button(
+                position=(screen_center_x - 100, start_y + button_spacing * 3),
                 size=(200, 50),
                 text="Quit",
                 on_click=self._on_quit
@@ -127,6 +137,10 @@ class MainMenuScene(BaseScene):
         """Handle settings button click"""
         # TODO: Push settings scene
         pass
+    
+    def _on_demo(self):
+        """Handle demo button click"""
+        self.engine.change_scene("demo")
     
     def _on_quit(self):
         """Handle quit button click"""
