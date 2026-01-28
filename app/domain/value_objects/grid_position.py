@@ -90,8 +90,7 @@ class GridPosition:
         return neighbors
     
     @classmethod
-    @property
-    def ALL_POSITIONS(cls) -> List["GridPosition"]:
+    def all_positions(cls) -> List["GridPosition"]:
         """
         Get all 9 positions on the 3x3 grid.
         
@@ -103,3 +102,10 @@ class GridPosition:
             for x in range(cls.GRID_SIZE)
             for y in range(cls.GRID_SIZE)
         ]
+    
+    # Class constant for all positions
+    ALL_POSITIONS: List["GridPosition"] = None  # Will be set after class definition
+
+
+# Initialize ALL_POSITIONS after class is defined
+GridPosition.ALL_POSITIONS = GridPosition.all_positions()

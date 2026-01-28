@@ -2,6 +2,7 @@
 Damage Calculator Utility
 Implements game damage formula as per design doc
 """
+import random
 from typing import List, Dict, Any
 from app.domain.value_objects.element import Element
 from app.domain.value_objects.hexagon_stats import HexagonStats
@@ -17,8 +18,6 @@ class DamageCalculator:
     
     DEF_REDUCTION_FACTOR = 0.5
     MIN_DAMAGE = 1
-    CRIT_BASE_MULTIPLIER = 1.5
-    CRIT_SCALING = 0.01  # 1% per CRIT point
     
     def calculate_damage(
         self,
@@ -141,6 +140,5 @@ class DamageCalculator:
         Returns:
             True if critical hit, False otherwise
         """
-        import random
         chance = self.get_crit_chance(crit_stat)
         return random.random() < chance
